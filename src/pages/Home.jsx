@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import  { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Home() {
@@ -173,8 +173,8 @@ export default function Home() {
           <div className="md:col-span-5 reveal">
             <div className="text-xs tracking-widest text-[color:var(--fire-1)] uppercase mb-4">— Featured App</div>
             <h2 className="text-4xl md:text-6xl font-bold flex items-center gap-4 mb-6">
-              <img src="https://z-cdn-media.chatglm.cn/files/9bfe01ca-5930-450b-8362-58800250a14b.jpeg?auth_key=1883790895-c3450f0d8f3f492c8eb243342b8b7978-0-8dcbfab481090539746a6bb29b2473cb" alt="Ember Logo" className="w-14 h-14 rounded-2xl object-cover" />
-              Ember<span className="grad-fire">.</span>
+              <img src="/requit-logo.jpg" alt="Ember Logo" className="w-14 h-14 rounded-2xl object-cover" />
+              Requit<span className="grad-fire">.</span>
             </h2>
             <p className="text-[color:var(--muted)] mb-8 max-w-md text-lg">A habit & fitness companion designed to make momentum feel effortless. Powered by smooth Rive & Lottie micro-interactions.</p>
             <div className="space-y-4 mb-10">
@@ -187,7 +187,7 @@ export default function Home() {
                 <div><h3 className="font-semibold mb-1">Streak mechanics</h3><p className="text-sm text-[color:var(--muted)]">Borrowed from game design — momentum you can feel, not just track.</p></div>
               </div>
             </div>
-            <a href="#" className="inline-flex items-center gap-3 btn-fire px-6 py-3 rounded-full text-sm">View on App Store <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+            <a href="https://play.google.com/store/apps/details?id=com.movexlabs.rewireapp&pcampaignid=web_share" className="inline-flex items-center gap-3 btn-fire px-6 py-3 rounded-full text-sm">View on App Store <i className="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
           </div>
           <div className="md:col-span-7 reveal">
             <div className="app-gallery">
