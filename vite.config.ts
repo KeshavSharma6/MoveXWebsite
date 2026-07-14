@@ -9,7 +9,7 @@ export default defineConfig({
     tailwindcss(),
     react()
   ],
-  base: "/",
+  base: "movexwebsite",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
