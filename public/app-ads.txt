@@ -1,2 +1,2 @@
-# MoveXLabs Ads.txt
+
 google.com, pub-6685403163440177, DIRECT, f08c47fec0942fa0
