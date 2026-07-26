@@ -136,7 +136,7 @@ export function DeleteAccount() {
             Can't find the option in the app, or need help?
           </p>
           <a
-            href="mailto:movexlabs@gmail.com?subject=Account Deletion Request"
+            href="mailto:mail@movexlabs.com?subject=Account Deletion Request"
             className="inline-flex items-center gap-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors duration-150 link-underline"
           >
             <Mail size={14} />

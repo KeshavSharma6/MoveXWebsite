@@ -88,7 +88,7 @@ export default function About() {
                 <div className="max-w-4xl mx-auto text-center reveal">
                     <h2 className="text-4xl md:text-7xl font-bold leading-tight mb-6">Want to work <span className="grad-fire">with us?</span></h2>
                     <p className="text-[color:var(--muted)] mb-10 max-w-xl mx-auto">Drop us a line. We reply within 24 hours — usually faster.</p>
-                    <a href="mailto:hello@movexlabs.com" className="inline-flex items-center gap-3 btn-fire px-8 py-4 rounded-full text-base"><i className="fa-solid fa-envelope"></i> hello@movexlabs.com</a>
+                    <a href="mailto:mail@movexlabs.com" className="inline-flex items-center gap-3 btn-fire px-8 py-4 rounded-full text-base"><i className="fa-solid fa-envelope"></i> mail@movexlabs.com</a>
                 </div>
             </section>
         </div>

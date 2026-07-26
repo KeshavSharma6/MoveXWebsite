@@ -592,6 +592,58 @@ h3,
   transform: translateY(-4px);
 }
 
+@media (max-width: 640px) {
+  .phone {
+    width: 220px;
+    height: 460px;
+  }
+
+  .app-gallery {
+    height: auto;
+    display: flex;
+    overflow-x: auto;
+    gap: 1.25rem;
+    padding: 1rem 0;
+    perspective: none;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .app-screen-card {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    flex-shrink: 0;
+    width: 220px;
+    height: 420px;
+    scroll-snap-align: center;
+  }
+
+  .scene-container {
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .scene-layer.glass.core-card {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+
+  .core-bg-text {
+    display: none;
+  }
+}
+
 @keyframes float1 {
 
   0%,

@@ -33,7 +33,7 @@ export default function Footer() {
                     <div>
                         <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider">Get in touch</h4>
                         <ul className="space-y-3 text-sm text-[color:var(--muted)]">
-                            <li><a href="mailto:hello@movexlabs.com" className="hover:text-white transition flex items-center gap-2"><i className="fa-solid fa-envelope text-[color:var(--fire-1)]"></i> hello@movexlabs.com</a></li>
+                            <li><a href="mailto:mail@movexlabs.com" className="hover:text-white transition flex items-center gap-2"><i className="fa-solid fa-envelope text-[color:var(--fire-1)]"></i> mail@movexlabs.com</a></li>
                             <li><a href="#" className="hover:text-white transition flex items-center gap-2"><i className="fa-solid fa-file-shield text-[color:var(--fire-1)]"></i> Privacy Policy</a></li>
                             <li><a href="#" className="hover:text-white transition flex items-center gap-2"><i className="fa-solid fa-scale-balanced text-[color:var(--fire-1)]"></i> Terms of Service</a></li>
                         </ul>

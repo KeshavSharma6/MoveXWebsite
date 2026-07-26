@@ -46,7 +46,7 @@ export function NotFound() {
             Back to home
           </Link>
           <a
-            href="mailto:movexlabs@gmail.com"
+            href="mailto:mail@movexlabs.com"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-150 link-underline"
           >
             Report an issue
