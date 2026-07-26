@@ -9,8 +9,23 @@ export default function Navbar() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const handleNav = (path) => {
-        navigate(path);
         setMobileMenuOpen(false);
+        if (path.startsWith('/#')) {
+            const targetId = path.replace('/#', '');
+            if (location.pathname !== '/') {
+                navigate('/');
+                setTimeout(() => {
+                    const el = document.getElementById(targetId);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 150);
+            } else {
+                const el = document.getElementById(targetId);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            navigate(path);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     };
 
     return (
@@ -40,40 +55,91 @@ export default function Navbar() {
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     aria-label="Toggle Navigation Menu"
-                    className="md:hidden w-10 h-10 rounded-xl border border-[color:var(--line)] bg-white/5 flex items-center justify-center text-white focus:outline-none active:scale-95 transition"
+                    className="md:hidden w-11 h-11 rounded-xl border border-[color:var(--line)] bg-white/5 flex items-center justify-center text-white focus:outline-none active:scale-95 transition"
                 >
-                    <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark text-lg' : 'fa-bars text-base'} text-[color:var(--fire-1)]`}></i>
+                    <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark text-xl' : 'fa-bars text-lg'} text-[color:var(--fire-1)]`}></i>
                 </button>
             </div>
 
             {/* Mobile Navigation Drawer */}
-            {mobileMenuOpen && (
-                <div className="md:hidden glass border-b border-[color:var(--line)] px-6 py-6 flex flex-col gap-3 text-base font-medium bg-[#0a0807]/95 backdrop-blur-xl">
-                    <span onClick={() => handleNav('/apps')} className={`py-2.5 border-b border-white/5 flex items-center justify-between cursor-pointer ${currentPage === '/apps' ? 'text-[color:var(--fire-1)] font-semibold' : 'text-[color:var(--muted)]'}`}>
-                        Apps <i className="fa-solid fa-chevron-right text-xs opacity-50"></i>
-                    </span>
-                    <span onClick={() => handleNav('/#work')} className="py-2.5 border-b border-white/5 flex items-center justify-between text-[color:var(--muted)] cursor-pointer">
-                        Featured <i className="fa-solid fa-chevron-right text-xs opacity-50"></i>
-                    </span>
-                    <span onClick={() => handleNav('/about')} className={`py-2.5 border-b border-white/5 flex items-center justify-between cursor-pointer ${currentPage === '/about' ? 'text-[color:var(--fire-1)] font-semibold' : 'text-[color:var(--muted)]'}`}>
-                        About <i className="fa-solid fa-chevron-right text-xs opacity-50"></i>
-                    </span>
-                    <span onClick={() => handleNav('/blog')} className={`py-2.5 border-b border-white/5 flex items-center justify-between cursor-pointer ${currentPage === '/blog' ? 'text-[color:var(--fire-1)] font-semibold' : 'text-[color:var(--muted)]'}`}>
-                        Blog <i className="fa-solid fa-chevron-right text-xs opacity-50"></i>
-                    </span>
-                    <span onClick={() => handleNav('/#vibe-coding')} className="py-2.5 border-b border-white/5 flex items-center justify-between text-[color:var(--muted)] cursor-pointer">
-                        AI Prototype Finish <i className="fa-solid fa-chevron-right text-xs opacity-50"></i>
-                    </span>
-                    <span onClick={() => handleNav('/#hire')} className="py-2.5 border-b border-white/5 flex items-center justify-between text-[color:var(--muted)] cursor-pointer">
-                        Pricing <i className="fa-solid fa-chevron-right text-xs opacity-50"></i>
-                    </span>
-                    <div className="pt-3">
-                        <span onClick={() => handleNav('/#hire')} className="btn-fire w-full py-3.5 rounded-full text-center block text-sm font-semibold cursor-pointer">
-                            Start a Project <i className="fa-solid fa-arrow-right text-xs ml-1"></i>
-                        </span>
-                    </div>
+            <div
+                className="md:hidden"
+                style={{
+                    position: 'fixed',
+                    inset: '73px 0 0 0',
+                    zIndex: 50,
+                    pointerEvents: mobileMenuOpen ? 'auto' : 'none',
+                    opacity: mobileMenuOpen ? 1 : 0,
+                    transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-12px)',
+                    transition: 'opacity 0.25s ease, transform 0.25s ease',
+                    background: 'rgba(10, 8, 7, 0.98)',
+                    backdropFilter: 'blur(24px)',
+                    borderBottom: '1px solid rgba(255,140,66,0.14)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    padding: '1.5rem 1.5rem 2rem',
+                    overflowY: 'auto',
+                }}
+            >
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+                    {[
+                        { label: 'Apps', path: '/apps' },
+                        { label: 'Featured Work', path: '/#work' },
+                        { label: 'About Us', path: '/about' },
+                        { label: 'Blog & Insights', path: '/blog' },
+                        { label: 'Plans & Pricing', path: '/#hire' },
+                    ].map(({ label, path }) => {
+                        const isActive = path.startsWith('/') && !path.startsWith('/#') && currentPage === path;
+                        return (
+                            <span
+                                key={label}
+                                onClick={() => handleNav(path)}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    padding: '1rem 0',
+                                    borderBottom: '1px solid rgba(255,140,66,0.1)',
+                                    fontSize: '1.125rem',
+                                    fontWeight: isActive ? '700' : '500',
+                                    color: isActive ? 'var(--fire-1)' : '#e8ddd5',
+                                    cursor: 'pointer',
+                                    letterSpacing: '-0.01em',
+                                    transition: 'color 0.2s',
+                                }}
+                            >
+                                {label}
+                                <i
+                                    className="fa-solid fa-chevron-right"
+                                    style={{
+                                        fontSize: '0.7rem',
+                                        color: isActive ? 'var(--fire-1)' : 'rgba(255,140,66,0.5)',
+                                    }}
+                                ></i>
+                            </span>
+                        );
+                    })}
                 </div>
-            )}
+                <div style={{ paddingTop: '1.5rem' }}>
+                    <span
+                        onClick={() => handleNav('/#hire')}
+                        className="btn-fire"
+                        style={{
+                            display: 'block',
+                            width: '100%',
+                            padding: '1rem',
+                            borderRadius: '9999px',
+                            textAlign: 'center',
+                            fontSize: '1rem',
+                            fontWeight: '700',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        Start a Project <i className="fa-solid fa-arrow-right" style={{ marginLeft: '0.5rem', fontSize: '0.85rem' }}></i>
+                    </span>
+                </div>
+            </div>
         </nav>
     );
 }

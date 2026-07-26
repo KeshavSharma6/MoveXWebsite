@@ -8,7 +8,8 @@ export default function Home() {
   const processFillRef = useRef(null)
 
   useEffect(() => {
-    // 3D Tilt on Hero Phone
+    // 3D Tilt on Hero Phone (Desktop only for 60fps mobile speed)
+    if (window.innerWidth < 768) return
     const tiltPhone = tiltPhoneRef.current
     const perspectiveContainer = perspectiveRef.current
     if (perspectiveContainer && tiltPhone) {
@@ -33,7 +34,8 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    // 3D Parallax Scene
+    // 3D Parallax Scene (Desktop only for 60fps mobile speed)
+    if (window.innerWidth < 768) return
     const scene = sceneRef.current
     if (!scene) return
     const layers = scene.querySelectorAll('.scene-layer')
@@ -143,9 +145,9 @@ export default function Home() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative pt-40 pb-24 px-6">
+      <section className="relative pt-32 md:pt-40 pb-12 md:pb-24 px-4 md:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-24">
+          <div className="flex flex-col items-center text-center mb-12 md:mb-24">
             <div className="mb-8 reveal text-sm text-[color:var(--muted)] font-light tracking-[0.4em] uppercase">Mobile App Development Studio</div>
             <h1 className="hero-title reveal">We build mobile apps<br />that launch on <span className="grad-fire italic">schedule</span>.</h1>
             <p className="text-lg text-[color:var(--muted)] max-w-xl mt-8 reveal">movexlabs builds high-performance iOS and Android apps for startups and founders. Fixed pricing, weekly TestFlight builds, and full source code hand-off.</p>
@@ -155,7 +157,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div ref={perspectiveRef} className="perspective-container flex justify-center items-center gap-6 md:gap-12 mb-16 reveal">
+          <div ref={perspectiveRef} className="perspective-container flex justify-center items-center gap-6 md:gap-12 mb-10 md:mb-16 reveal">
             <div className="phone hidden md:block" style={{ animation: 'float1 6s ease-in-out infinite' }}>
               <div className="phone-screen"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=800&fit=crop" alt="App UI Left" /></div>
             </div>
@@ -192,6 +194,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* VIBE-CODED PROJECT COMPLETION SECTION */}
       <section id="vibe-coding" className="relative py-24 px-6 border-y border-[color:var(--line)] bg-white/[0.01]">
@@ -245,8 +248,8 @@ export default function Home() {
       </section>
 
       {/* FEATURED APP */}
-      <section id="work" className="relative py-32 px-6">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-12 items-center">
+      <section id="work" className="relative py-16 md:py-32 px-4 md:px-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-8 md:gap-12 items-center">
           <div className="md:col-span-5 reveal">
             <div className="text-xs tracking-widest text-[color:var(--fire-1)] uppercase mb-4">— Featured Case Study</div>
             <h2 className="text-4xl md:text-6xl font-bold flex items-center gap-4 mb-6">
@@ -268,9 +271,9 @@ export default function Home() {
           </div>
           <div className="md:col-span-7 reveal">
             <div className="app-gallery">
-              <a href="#" className="app-screen-card" style={{ left: '20%', top: '20px', transform: 'rotateY(10deg) rotateX(2deg) rotate(-5deg)', zIndex: 2 }}><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=1200&fit=crop" alt="Screen 1" /></a>
-              <a href="#" className="app-screen-card" style={{ left: '50%', top: 0, transform: 'translateX(-50%) rotateY(0deg) rotate(0deg)', zIndex: 3 }}><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=1200&fit=crop" alt="Screen 2" /></a>
-              <a href="#" className="app-screen-card" style={{ right: '20%', top: '20px', transform: 'rotateY(-10deg) rotateX(2deg) rotate(5deg)', zIndex: 2 }}><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=1200&fit=crop" alt="Screen 3" /></a>
+              <a href="#" className="app-screen-card card-1"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=1200&fit=crop" alt="Screen 1" /></a>
+              <a href="#" className="app-screen-card card-2"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=1200&fit=crop" alt="Screen 2" /></a>
+              <a href="#" className="app-screen-card card-3"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=1200&fit=crop" alt="Screen 3" /></a>
             </div>
           </div>
         </div>
@@ -333,13 +336,13 @@ export default function Home() {
               <div className="h-10 flex items-center text-2xl font-bold text-white opacity-60 hover:opacity-100 transition">Convex</div>
             </div>
           </div>
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {techStack.map((tech, i) => (
-              <div key={i} className="tech-card glass rounded-2xl p-6 reveal">
+              <div key={i} className="tech-card glass rounded-2xl p-4 md:p-6 reveal flex md:block items-center gap-3">
                 <div className="tech-glow" style={{ background: tech.glow }}></div>
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-white/5 gap-1">{tech.icon}</div>
-                <h3 className="text-lg font-semibold mb-1">{tech.title}</h3>
-                <p className="text-xs text-[color:var(--muted)]">{tech.desc}</p>
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center md:mb-5 bg-white/5 gap-1 flex-shrink-0">{tech.icon}</div>
+                <h3 className="text-sm md:text-lg font-semibold md:mb-1">{tech.title}</h3>
+                <p className="tech-desc text-xs text-[color:var(--muted)]">{tech.desc}</p>
               </div>
             ))}
           </div>

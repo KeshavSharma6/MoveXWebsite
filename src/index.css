@@ -337,6 +337,11 @@ h3,
   object-fit: cover;
 }
 
+/* Desktop card positions */
+.app-screen-card.card-1 { left: 20%; top: 20px; transform: rotateY(10deg) rotateX(2deg) rotate(-5deg); z-index: 2; }
+.app-screen-card.card-2 { left: 50%; top: 0; transform: translateX(-50%) rotateY(0deg) rotate(0deg); z-index: 3; }
+.app-screen-card.card-3 { right: 20%; top: 20px; transform: rotateY(-10deg) rotateX(2deg) rotate(5deg); z-index: 2; }
+
 .tech-card {
   position: relative;
   overflow: hidden;
@@ -592,40 +597,57 @@ h3,
   transform: translateY(-4px);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  /* Reduce reveal animation cost on mobile */
+  .reveal {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
   .phone {
-    width: 220px;
-    height: 460px;
+    width: 200px;
+    height: 420px;
   }
 
+  /* Featured App gallery: stack as 3-column grid on mobile (no bleed) */
   .app-gallery {
+    position: relative;
     height: auto;
-    display: flex;
-    overflow-x: auto;
-    gap: 1.25rem;
-    padding: 1rem 0;
     perspective: none;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    padding: 1rem 0;
+    overflow: visible;
   }
 
-  .app-screen-card {
+  .app-screen-card,
+  .app-screen-card.card-1,
+  .app-screen-card.card-2,
+  .app-screen-card.card-3 {
     position: relative !important;
     left: auto !important;
     right: auto !important;
     top: auto !important;
     transform: none !important;
-    flex-shrink: 0;
-    width: 220px;
-    height: 420px;
-    scroll-snap-align: center;
+    flex-shrink: unset;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    height: auto;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px -4px rgba(0,0,0,0.5);
   }
 
+  /* Tech stack cards: compact icon + name row, hide description */
+  .tech-desc {
+    display: none;
+  }
+
+  /* 3D interactive core: stack as simple grid on mobile */
   .scene-container {
     height: auto;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
     padding: 1rem 0;
   }
 
@@ -641,6 +663,18 @@ h3,
 
   .core-bg-text {
     display: none;
+  }
+
+  /* Disable heavy hover transitions on mobile */
+  .tech-card,
+  .glass {
+    transition: none;
+  }
+
+  /* Float animations are expensive on mobile, disable them */
+  .phone,
+  .phone > * {
+    animation: none !important;
   }
 }
 
