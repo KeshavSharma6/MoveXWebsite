@@ -2,7 +2,7 @@
   --bg: #0a0807;
   --bg-2: #120c08;
   --ink: #f6f1ea;
-  --muted: #9a8b7d;
+  --muted: #C7CCD4;
   --fire-1: #ffbe0b;
   --fire-2: #fb5607;
   --fire-3: #ff4d00;
@@ -24,9 +24,26 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   cursor: none;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--fire-1);
+  outline-offset: 3px;
 }
 
 h1,
@@ -104,15 +121,13 @@ h3,
   transition: width 0.1s;
 }
 
-/* Backgrounds */
+/* Backgrounds - Orange glow ONLY behind hero */
 .bg-ambient {
   position: fixed;
   inset: 0;
   z-index: -2;
   pointer-events: none;
-  background: radial-gradient(900px 600px at 15% -10%, rgba(251, 86, 7, 0.15), transparent 60%),
-    radial-gradient(700px 500px at 90% 10%, rgba(255, 190, 11, 0.08), transparent 60%),
-    radial-gradient(800px 700px at 50% 110%, rgba(255, 77, 0, 0.12), transparent 60%),
+  background: radial-gradient(850px 520px at 50% 0%, rgba(251, 86, 7, 0.16), transparent 70%),
     var(--bg);
 }
 
@@ -196,6 +211,11 @@ h3,
   background: linear-gradient(120deg, #ffbe0b, #fb5607 60%, #ff3d00);
   color: #160a00;
   font-weight: 600;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: none;
 }
@@ -224,6 +244,11 @@ h3,
 .btn-ghost {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.02);
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
   transition: all 0.3s;
   cursor: none;
 }
@@ -233,59 +258,52 @@ h3,
   background: rgba(251, 86, 7, 0.08);
 }
 
-/* Phone Mockups */
-.perspective-container {
-  perspective: 1200px;
-  perspective-origin: 50% 50%;
-}
-
-.phone {
-  width: 240px;
-  height: 500px;
-  border-radius: 42px;
+/* Device Placeholder Frame */
+.device-frame {
+  width: 100%;
+  max-width: 300px;
+  height: 560px;
+  border-radius: 46px;
   background: linear-gradient(160deg, #1a1410, #0a0807);
   padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 140, 66, 0.05) inset, 0 0 60px -20px rgba(251, 86, 7, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 140, 66, 0.08) inset;
   position: relative;
-  transform-style: preserve-3d;
+  margin: 0 auto;
 }
 
-.phone::before {
-  content: '';
+.device-island {
   position: absolute;
   top: 14px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
-  height: 20px;
+  width: 84px;
+  height: 22px;
   border-radius: 14px;
   background: #000;
-  z-index: 5;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.phone::after {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  border-radius: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  pointer-events: none;
-}
-
-.phone-screen {
+.device-screen-slot {
   width: 100%;
   height: 100%;
-  border-radius: 32px;
-  overflow: hidden;
+  border-radius: 36px;
+  background: #070605;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
   position: relative;
-  background: #0a0807;
+  overflow: hidden;
+  transition: border-color 0.3s ease;
 }
 
-.phone-screen img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.device-screen-slot:hover {
+  border-color: rgba(255, 140, 66, 0.4);
 }
 
 /* Glass & Reveal */
@@ -296,20 +314,37 @@ h3,
   transition: all 0.4s ease;
 }
 
+/* Immediate visibility - no scroll fade-up delay */
 .reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s cubic-bezier(0.2, 0.7, 0.2, 1), transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.reveal.in {
   opacity: 1;
   transform: none;
 }
 
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate {
+  animation: heroFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cta-headline {
+  line-height: 1.15;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  overflow: visible;
+}
+
 .hero-title {
-  font-size: clamp(2.8rem, 8vw, 6.5rem);
-  line-height: 0.95;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  line-height: 1.05;
   font-weight: 800;
 }
 
@@ -338,9 +373,26 @@ h3,
 }
 
 /* Desktop card positions */
-.app-screen-card.card-1 { left: 20%; top: 20px; transform: rotateY(10deg) rotateX(2deg) rotate(-5deg); z-index: 2; }
-.app-screen-card.card-2 { left: 50%; top: 0; transform: translateX(-50%) rotateY(0deg) rotate(0deg); z-index: 3; }
-.app-screen-card.card-3 { right: 20%; top: 20px; transform: rotateY(-10deg) rotateX(2deg) rotate(5deg); z-index: 2; }
+.app-screen-card.card-1 {
+  left: 20%;
+  top: 20px;
+  transform: rotateY(10deg) rotateX(2deg) rotate(-5deg);
+  z-index: 2;
+}
+
+.app-screen-card.card-2 {
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) rotateY(0deg) rotate(0deg);
+  z-index: 3;
+}
+
+.app-screen-card.card-3 {
+  right: 20%;
+  top: 20px;
+  transform: rotateY(-10deg) rotateX(2deg) rotate(5deg);
+  z-index: 2;
+}
 
 .tech-card {
   position: relative;
@@ -598,6 +650,7 @@ h3,
 }
 
 @media (max-width: 768px) {
+
   /* Reduce reveal animation cost on mobile */
   .reveal {
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -634,7 +687,7 @@ h3,
     aspect-ratio: 9 / 16;
     height: auto;
     border-radius: 18px;
-    box-shadow: 0 8px 20px -4px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.5);
   }
 
   /* Tech stack cards: compact icon + name row, hide description */
@@ -673,7 +726,7 @@ h3,
 
   /* Float animations are expensive on mobile, disable them */
   .phone,
-  .phone > * {
+  .phone>* {
     animation: none !important;
   }
 }
@@ -711,5 +764,35 @@ h3,
 
   50% {
     transform: translateY(-18px) rotate(6deg) translateZ(-40px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-animate {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .marquee-track {
+    animation: none !important;
+  }
+
+  body {
+    cursor: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-outline {
+    display: none !important;
   }
 }
